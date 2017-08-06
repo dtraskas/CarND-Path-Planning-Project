@@ -12,22 +12,22 @@ int GetLane(double d)
 	return lane_index;
 }
 
-double quintic_eval_s(vector<double> p, double t)
+double QuinticS(vector<double> p, double t)
 {
 	return p[0]+p[1]*t+p[2]*pow(t,2)+p[3]*pow(t,3)+p[4]*pow(t,4)+p[5]*pow(t,5);
 }
 
-double quintic_eval_d(vector<double> p, double t)
+double QuinticD(vector<double> p, double t)
 {
 	return p[1]+2*p[2]*t+3*p[3]*pow(t,2)+4*p[4]*pow(t,3)+5*p[5]*pow(t,4);
 }
 
-double quintic_eval_a(vector<double> p, double t)
+double QuinticA(vector<double> p, double t)
 {
 	return 2*p[2]+6*p[3]*t+12*p[4]*pow(t, 2)+20*p[5]*pow(t, 3);
 }
 
-double distanceS(double x1, double y1, double x2, double y2)
+double GetDistance(double x1, double y1, double x2, double y2)
 {
 	return sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));
 }

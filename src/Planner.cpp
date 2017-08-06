@@ -159,9 +159,9 @@ int Planner::GenerateTrajectory(const vector<double> &vehicle_state, const int c
 	double px = 0.0;
 	double py = 0.0;
 	for(int t = 0; t < TRAJECTORY_STEPS / 2; ++t) {	
-		double s   = quintic_eval_s(jmt_s_params, t);
-		double s_v = quintic_eval_d(jmt_s_params, t);
-		double s_a = quintic_eval_a(jmt_s_params, t);
+		double s   = QuinticS(jmt_s_params, t);
+		double s_v = QuinticD(jmt_s_params, t);
+		double s_a = QuinticA(jmt_s_params, t);
 		
 		if(t < num_reuse) {  	
 			s   = next_sva[t - 1][0] - s0;
@@ -170,9 +170,9 @@ int Planner::GenerateTrajectory(const vector<double> &vehicle_state, const int c
 			s_a = next_sva[t - 1][2];
 		}
 		
-		double d = quintic_eval_s(jmt_d_params, t);
-		double d_v = quintic_eval_d(jmt_d_params, t);
-		double d_a = quintic_eval_a(jmt_d_params, t);
+		double d = QuinticS(jmt_d_params, t);
+		double d_v = QuinticD(jmt_d_params, t);
+		double d_a = QuinticA(jmt_d_params, t);
 		
 		if(t > 0 && (s - previous_s) > max_dist_per_step) {
 			s = previous_s + max_dist_per_step;
@@ -180,12 +180,12 @@ int Planner::GenerateTrajectory(const vector<double> &vehicle_state, const int c
 		
 		auto xy = FitXY(s, d, spline_fit_sx, spline_fit_sy, spline_fit_sdx, spline_fit_sdy);
 		if(t > 0) { 
-			double dxy = distanceS(px, py, xy[0], xy[1]);
+			double dxy = GetDistance(px, py, xy[0], xy[1]);
 			if(dxy > max_dist_per_step) {				
 				while(dxy > max_dist_per_step) {
 					s -= 0.01;
 					xy = FitXY(s, d, spline_fit_sx, spline_fit_sy, spline_fit_sdx, spline_fit_sdy);
-					dxy = distanceS(px, py, xy[0], xy[1]);
+					dxy = GetDistance(px, py, xy[0], xy[1]);
 				}
 			}
 		}
