@@ -3,6 +3,10 @@ Self-Driving Car Engineer Nanodegree Program
 
 The objective in this project is design a path planner that allows our simulated vehicle to safely navigate on a busy highway highway with traffic while keeping the speed below the threshold of 50MPH.
 
+To run the simulator run the build process and then execute ./build/path_planning.
+
+To see a video of the simulator go [here](https://youtu.be/H4LVvOzFvI0) 
+
 ## Structure
 
 The code in this project has been divided into different classes that are responsible for different areas of the planner. 
